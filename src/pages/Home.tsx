@@ -13,8 +13,6 @@ const Home: React.FC = () => {
     data.map(item => (
         dataChart.push(item.confirmed, item.deaths)
     ))
-
-    console.log('dataChart', typeof Object.values(dataChart))
     
     useEffect(() => {
         dispatch(fetchReports(''))

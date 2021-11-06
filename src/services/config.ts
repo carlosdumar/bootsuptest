@@ -7,7 +7,7 @@ const headers = {
 }
 
 export default axios.create({
-    baseURL: 'https://covid-api.com/api/reports?iso=USA&region_name=US&per_page=20',
+    baseURL: 'https://covid-api.com/api/reports/total?iso=USA',
     responseType: 'json',
     headers
 })

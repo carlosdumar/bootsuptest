@@ -1,7 +1,8 @@
 import { createSlice, Dispatch, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import { initialStateReport as initialState } from "../app/initialState";
-import {  IReport, Result } from '../interfaces/ReportInterface';
+import {  Result } from '../interfaces/ReportInterface';
 import ReportService from '../services/ReportService'
+import type { RootState } from '../app/store'
 
 export const reportsSlice = createSlice({
     name: 'reports',
@@ -11,13 +12,8 @@ export const reportsSlice = createSlice({
             state.status = 'loading'
         },
         reportLoaded(state, action: PayloadAction<Result>) {
-            
-            const newReports: any = []
-            action.payload.data.forEach((report: any, index: number) => {
-                newReports[index] = report
-            })
-            console.log('newReports', newReports)
-            state.report = newReports
+            console.log('action.payload', action.payload.data)
+            state.report = action.payload
             state.status = 'succeeded'
         },
         reportFailure(state, action: PayloadAction<any>) {
@@ -49,6 +45,6 @@ export const fetchReports = (type: string | '') => {
 }
 
 
-export const selectAllReports = (state:any): Array<any> => state.reports.report
+export const selectAllReports = (state:RootState) => state.reports.report
 
 export const selectReports = createSelector(selectAllReports, report => Object.values(report))

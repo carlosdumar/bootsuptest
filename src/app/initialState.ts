@@ -1,7 +1,7 @@
-import { Result } from "../interfaces/ReportInterface";
+import { IReport } from "../interfaces/ReportInterface";
 
 export const initialStateReport = {
     status: 'idle',
-    report: {} as Result,
+    report: {} as IReport,
     error: null
 }

@@ -18,3 +18,5 @@ export default function configureStoreApp(preloadedState: Record<string, undefin
 
     return store
 }
+
+export type RootState = ReturnType<typeof rootReducer>

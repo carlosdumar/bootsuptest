@@ -8,12 +8,14 @@ import { fetchReports, selectReports } from '../features/reportsSlice';
 const Home: React.FC = () => {
     const dispatch = useDispatch()    
     const data = useSelector(selectReports)
-    let carlos = []
-    console.log('data', data)
-    data.map((item:any) => {
-        carlos.push([item.deaths, item.region.province])
-    })
-    console.log('carlos', carlos)
+    let dataChart:any = [] 
+    
+    data.map(item => (
+        dataChart.push(item.confirmed, item.deaths)
+    ))
+
+    console.log('dataChart', typeof Object.values(dataChart))
+    
     useEffect(() => {
         dispatch(fetchReports(''))
     }, [dispatch])    
@@ -22,10 +24,20 @@ const Home: React.FC = () => {
         <div>
            <Chart
             width={'500px'}
-            height={'300px'}
+            height={'500px'}
             chartType="Histogram"
             loader={<div>Loading Chart</div>}
-            data={[carlos]} 
+            data={[['Confirmed Cases', 'Deaths'], dataChart]} 
+            options={{
+                title: 'Covid-2019 cases in US',
+                hAxis: {
+                    title: 'US',
+                },
+                vAxis: {
+                    title: 'Deaths/Confirmed Cases',
+                },
+            }}
+            
            />    
         </div>
     )
